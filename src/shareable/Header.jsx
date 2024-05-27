@@ -83,7 +83,7 @@ const Header = () => {
             className="outline-none border-none bg-inherit text-base font-medium"
           />
         </div>
-        <AiFillMessage className="text-2xl hover:text-black text-gray-600 cursor-pointer" />
+        <AiFillMessage className="text-2xl hover:text-black text-gray-600 cursor-pointer " />
       </div>
     </>
   );
