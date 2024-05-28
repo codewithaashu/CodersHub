@@ -11,14 +11,14 @@ const ConnectionModal = () => {
           <TabsList className="grid w-full grid-cols-2 bg-background">
             <TabsTrigger
               value="followers"
-              className="text-primary text-sm font-medium flex flex-row justify-around data-[state=active]:bg-primary-foreground data-[state=active]:border-b-2 border-primary rounded-none"
+              className="text-primary text-sm font-medium flex flex-row justify-around data-[state=active]:bg-muted data-[state=active]:border-b-2 border-primary rounded-none"
             >
               <p className="text-[13px]">Followers</p>
               <p>420</p>
             </TabsTrigger>
             <TabsTrigger
               value="following"
-              className="text-primary text-sm font-medium flex flex-row justify-around data-[state=active]:bg-primary-foreground data-[state=active]:border-b-2 border-primary rounded-none"
+              className="text-primary text-sm font-medium flex flex-row justify-around data-[state=active]:bg-muted data-[state=active]:border-b-2 border-primary rounded-none"
             >
               <p className="text-[13px]">Following</p>
               <p>5</p>

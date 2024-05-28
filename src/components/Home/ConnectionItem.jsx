@@ -10,7 +10,7 @@ const ConnectionItem = () => {
         <div className="flex flex-row gap-2">
           <AvatarComponent
             className="w-9 h-9"
-            imgSrc="https://github.com/shadcn.png"
+            imgSrc="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
           />
           <div className="flex flex-col gap-0">
             <p className="text-sm font-medium">Muskan</p>

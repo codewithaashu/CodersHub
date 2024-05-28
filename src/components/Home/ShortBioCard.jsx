@@ -6,11 +6,13 @@ import AvatarComponent from "@/shareable/AvatarComponent";
 const ShortBioCard = () => {
   return (
     <>
-      <Card className="w-[280px] pt-3">
+      <Card className="w-full pt-3">
         <CardContent>
           <div className="flex flex-row gap-3 items-center border-b-[1px] pb-2">
             <AvatarComponent
-              imgSrc={"https://github.com/shadcn.png"}
+              imgSrc={
+                "http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
+              }
               className="w-12 h-12"
             />
             <div className="flex flex-col gap-[1.5px]">

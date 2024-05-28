@@ -19,12 +19,12 @@ const Header = () => {
             alt="Logo"
             className="w-8 h-8"
           />
-          <div className="flex flex-row items-center bg-input px-3 py-[5px] gap-2 rounded-sm ">
-            <IoSearch className="text-[17px]" />
+          <div className="flex flex-row items-center bg-muted px-3 py-[7px] gap-2 rounded-md ">
+            <IoSearch className="text-base" />
             <input
               type="text"
               placeholder="Search"
-              className="outline-none border-none bg-inherit text-base font-medium"
+              className="outline-none border-none bg-inherit text-sm font-normal"
             />
           </div>
         </div>
@@ -57,7 +57,7 @@ const Header = () => {
           </div>
           <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
             <img
-              src="https://github.com/shadcn.png"
+              src="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
               alt="Me"
               className="w-8 h-8 rounded-full object-cover"
             />
@@ -70,7 +70,7 @@ const Header = () => {
       >
         <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
           <img
-            src="https://github.com/shadcn.png"
+            src="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
             alt="Me"
             className="w-8 h-8 rounded-full object-cover"
           />

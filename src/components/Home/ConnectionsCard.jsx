@@ -8,7 +8,7 @@ import ConnectionModal from "./ConnectionModal";
 const ConnectionsCard = () => {
   return (
     <>
-      <Card className="w-[280px] pb-2">
+      <Card className=" pb-2">
         <Tabs defaultValue="followers" className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-border">
             <TabsTrigger
