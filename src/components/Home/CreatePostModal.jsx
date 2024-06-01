@@ -11,28 +11,41 @@ import { Button } from "../ui/button";
 import PostSettings from "./PostSettings";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import EmojiPicker from "emoji-picker-react";
+import CodeBox from "./CodeBox";
+import MediaBox from "./MediaBox";
+import DocumentBox from "./DocumentBox";
+import PollModalContainer from "./PollModalContainer";
+import PollBox from "./PollBox";
 const CreatePostModal = () => {
   const [text, setText] = useState("");
+  const [imageBox, setImageBox] = useState(false);
+  const [documentBox, setDocumentBox] = useState(false);
+  const [codeBox, setCodeBox] = useState(false);
+  const [pollBox, setPollBox] = useState(false);
+  const [poll, setPoll] = useState(null);
   const handleWritePost = (e) => {
     setText(e.target.value);
   };
+
   return (
     <>
-      <DialogContent className="sm:max-w-[425px] md:max-w-[680px] pb-8 ">
-        <div className="bg-muted rounded-md px-2 py-[6px] flex flex-row gap-3 w-fit items-center border-b-[1px] shadow-sm">
+      <DialogContent className="sm:max-w-[425px] md:max-w-[540px] h-fit max-h-[75vh] pb-8 overflow-y-auto flex flex-col ">
+        <div className="bg-muted rounded-md p-2 h-fit flex flex-row gap-3 w-fit items-center border-b-[1px] shadow-sm">
           <AvatarComponent
-            className="w-10 h-10 "
+            className="w-8 h-8 "
             imgSrc="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
           />
           <div className="flex flex-col gap-0">
-            <p className="text-sm font-semibold text-primary">Ashish Ranjan</p>
+            <p className="text-[13px] font-medium text-primary">
+              Ashish Ranjan
+            </p>
             <Dialog>
               <DialogTrigger asChild>
                 <div className="flex flex-row items-center justify-center -mt-[3px] cursor-pointer gap-[2px]">
-                  <p className="text-[11px] font-normal text-gray-500">
+                  <p className="text-[10px] font-normal text-gray-500">
                     Post Settings
                   </p>
-                  <TiSpannerOutline className="text-gray-700 text-xs" />
+                  <TiSpannerOutline className="text-gray-700 text-[11px]" />
                 </div>
               </DialogTrigger>
               <PostSettings />
@@ -40,18 +53,34 @@ const CreatePostModal = () => {
           </div>
         </div>
         {/* TextArea */}
-        <div className="w-full pt-2 flex flex-col gap-4">
-          <textarea
-            className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
-            placeholder="Describe what's on your mind..."
-            rows={10}
-            value={text}
-            onChange={handleWritePost}
-          ></textarea>
-          <div className="flex flex-row justify-between items-center border-[1px] rounded-md shadow-sm p-2 px-3">
+        <div className="w-full pt-2 flex flex-col gap-4 max-h-[720px] overflow-y-auto ">
+          <div className="flex flex-col gap-3">
+            <textarea
+              className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
+              placeholder="Describe what's on your mind..."
+              rows={`${imageBox || documentBox || codeBox || poll ? 5 : 10}`}
+              value={text}
+              onChange={handleWritePost}
+            ></textarea>
+            {imageBox && <MediaBox />}
+            {documentBox && <DocumentBox />}
+            {codeBox && <CodeBox />}
+            {pollBox && poll && <PollBox />}
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-row justify-between items-center border-[1px] rounded-md shadow-sm p-1 px-3">
             <p className="text-sm font-medium">Add to your post</p>
             <div className="flex flex-row gap-4">
-              <IoMdPhotos className="text-xl font-medium cursor-pointer" />
+              {/* Photos */}
+              <IoMdPhotos
+                className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
+                  imageBox ? "bg-gray-300 shadow-sm " : ""
+                }`}
+                onClick={() => setImageBox(!imageBox)}
+              />
+
+              {/* Emoji */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button>
@@ -70,17 +99,43 @@ const CreatePostModal = () => {
                   />
                 </PopoverContent>
               </Popover>
-              <IoCodeSlash className="text-xl font-medium cursor-pointer" />
-              <IoDocumentTextOutline className="text-xl font-medium cursor-pointer" />
-              <MdBarChart className="text-xl font-medium cursor-pointer" />
+
+              {/* Code */}
+              <IoCodeSlash
+                className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
+                  codeBox ? "bg-gray-300 shadow-sm " : ""
+                }`}
+                onClick={() => setCodeBox(!codeBox)}
+              />
+
+              {/* Document */}
+              <IoDocumentTextOutline
+                className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
+                  documentBox ? "bg-gray-300 shadow-sm " : ""
+                }`}
+                onClick={() => setDocumentBox(!documentBox)}
+              />
+
+              {/* Poll */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <MdBarChart
+                    onClick={() => setPollBox(!pollBox)}
+                    className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
+                      poll ? "bg-gray-300 shadow-sm " : ""
+                    }`}
+                  />
+                </DialogTrigger>
+                <PollModalContainer setPoll={setPoll} poll={poll} />
+              </Dialog>
             </div>
           </div>
-        </div>
-        {/* <div>
+          {/* <div>
           <p className="text-[13px] font-medium">Hashtags:</p>
           <input type="text" />
         </div> */}
-        <Button className="text-[15px]">Post</Button>
+          <Button className="text-[15px] ">Post</Button>
+        </div>
       </DialogContent>
     </>
   );

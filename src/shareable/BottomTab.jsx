@@ -7,7 +7,7 @@ const BottomTab = () => {
   return (
     <>
       <div
-        className="md:hidden flex flex-row w-full justify-around border-t-[1px] p-2 py-3 absolute bottom-0 bg-background"
+        className="md:hidden flex flex-row w-full justify-around border-t-[1px] p-2 py-3 fixed bottom-0 bg-background"
         style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px -3px 10px" }}
       >
         <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">

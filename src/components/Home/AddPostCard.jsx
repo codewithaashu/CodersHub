@@ -47,14 +47,16 @@ const AddPostCard = () => {
               <CreatePostModal />
             </Dialog>
           </div>
-          <div className="grid grid-cols-3 justify-between">
+          <div className="grid grid-cols-3 justify-between gap-x-5 md:gap-x-0">
             <div className="flex flex-row gap-2 items-center text-[13px] font-normal hover:bg-primary-foreground w-fit p-2 rounded-md shadow-sm cursor-pointer justify-self-start">
               <img
                 src="https://cdn-icons-png.flaticon.com/512/10485/10485057.png"
                 alt="Icon"
                 className="h-5 w-5"
               />
-              <p className="self-center">Share Thoughts</p>
+              <p className="self-center text-xs leading-[14px]">
+                Share Thoughts
+              </p>
             </div>
             <div className="flex flex-row gap-2 items-center text-[13px] leading-3 font-normal hover:bg-primary-foreground w-fit p-2 rounded-md shadow-sm cursor-pointer justify-self-center">
               <img
@@ -62,7 +64,9 @@ const AddPostCard = () => {
                 alt="Icon"
                 className="h-5 w-5"
               />
-              <p className="self-center mt-1">Ask Doubts</p>
+              <p className="self-center mt-1 text-xs leading-[14px]">
+                Ask Doubts
+              </p>
             </div>
             <div className="flex flex-row gap-2 items-center text-[13px] leading-3 font-normal hover:bg-primary-foreground w-fit p-2 rounded-md shadow-sm cursor-pointer justify-self-end">
               <img
@@ -70,7 +74,9 @@ const AddPostCard = () => {
                 alt="Icon"
                 className="h-5 w-5"
               />
-              <p className="self-center">Share Experience</p>
+              <p className="self-center text-xs leading-[14px]">
+                Share Experience
+              </p>
             </div>
           </div>
         </CardContent>
