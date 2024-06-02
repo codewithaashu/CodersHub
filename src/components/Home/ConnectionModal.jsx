@@ -3,11 +3,11 @@ import { DialogContent } from "../ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import ConnectionItem from "./ConnectionItem";
 
-const ConnectionModal = () => {
+const ConnectionModal = ({ activeTab }) => {
   return (
     <>
       <DialogContent className="sm:max-w-[425px] pb-8">
-        <Tabs defaultValue="followers" className="w-full">
+        <Tabs defaultValue={activeTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-background">
             <TabsTrigger
               value="followers"

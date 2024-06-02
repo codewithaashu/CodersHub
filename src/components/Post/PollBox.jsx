@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card, CardContent } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
 import { pollOptions } from "@/DB/ProgrammingLang";
 import { MdModeEdit } from "react-icons/md";
 
 const PollBox = () => {
-  const [chooseOption, setChooseOption] = useState(null);
   return (
     <>
       <Card className="w-full py-2 border-[1px] border-gray-300 shadow-md rounded-md relative">

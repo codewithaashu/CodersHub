@@ -8,14 +8,15 @@ import { BsEmojiSmile } from "react-icons/bs";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { MdBarChart } from "react-icons/md";
 import { Button } from "../ui/button";
-import PostSettings from "./PostSettings";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import EmojiPicker from "emoji-picker-react";
-import CodeBox from "./CodeBox";
-import MediaBox from "./MediaBox";
-import DocumentBox from "./DocumentBox";
-import PollModalContainer from "./PollModalContainer";
-import PollBox from "./PollBox";
+import DocumentBox from "../Post/DocumentBox";
+import MediaBox from "../Post/MediaBox";
+import CodeBox from "../Post/CodeBox";
+import PollBox from "../Post/PollBox";
+import PostSettings from "../Post/PostSettings";
+import PollModalContainer from "../Post/PollModalContainer";
+
 const CreatePostModal = () => {
   const [text, setText] = useState("");
   const [imageBox, setImageBox] = useState(false);
@@ -25,6 +26,9 @@ const CreatePostModal = () => {
   const [poll, setPoll] = useState(null);
   const handleWritePost = (e) => {
     setText(e.target.value);
+    document.getElementById("text").style.height = "auto";
+    document.getElementById("text").style.height =
+      document.getElementById("text").scrollHeight + "px";
   };
 
   return (
@@ -57,8 +61,9 @@ const CreatePostModal = () => {
           <div className="flex flex-col gap-3">
             <textarea
               className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
+              id="text"
               placeholder="Describe what's on your mind..."
-              rows={`${imageBox || documentBox || codeBox || poll ? 5 : 10}`}
+              rows={`${imageBox || documentBox || codeBox || poll ? 3 : 8}`}
               value={text}
               onChange={handleWritePost}
             ></textarea>

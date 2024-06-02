@@ -8,12 +8,16 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { BsEmojiSmile } from "react-icons/bs";
 import EmojiPicker from "emoji-picker-react";
 import { Card, CardContent } from "../ui/card";
-import { Separator } from "../ui/separator";
+import PostHeader from "./PostHeader";
+import PostContent from "./PostContent";
 
 const RepostBox = () => {
   const [text, setText] = useState("");
   const handleWritePost = (e) => {
     setText(e.target.value);
+    document.getElementById("repostText").style.height = "auto";
+    document.getElementById("repostText").style.height =
+      document.getElementById("repostText").scrollHeight + "px";
   };
   return (
     <>
@@ -45,9 +49,10 @@ const RepostBox = () => {
           <div>
             {/* TextArea */}
             <textarea
-              className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
+              className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-hidden "
               placeholder="Say something about this..."
-              rows={3}
+              rows={2}
+              id="repostText"
               value={text}
               onChange={handleWritePost}
             ></textarea>
@@ -56,49 +61,9 @@ const RepostBox = () => {
           <Card className="h-full py-1 mx-2">
             <CardContent className="p-[14px]">
               {/* Header */}
-              <div className="flex flex-row justify-between items-center">
-                <div className="flex flex-row gap-2 items-center">
-                  <AvatarComponent
-                    className="w-12 h-12 "
-                    imgSrc="https://github.com/shadcn.png"
-                  />
-                  <div className="flex flex-col gap-0">
-                    <p className="text-[15px] font-medium leading-5">
-                      Ashish Singh
-                    </p>
-                    <p className="text-xs font-normal my-0 text-muted-foreground">
-                      LNCT Group of College,Bhopal
-                    </p>
-                    <p className="text-[10px] font-normal text-muted-foreground -mt-[1px]">
-                      2days ago
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <PostHeader />
               {/* Content */}
-              <div className="flex flex-col gap-2 py-3">
-                {/* Paragraph */}
-                <p className="text-[13.5px] font-normal  leading-[22px]">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Totam adipisci alias praesentium eius eveniet! Iure eius
-                  eveniet ut! Voluptate quia facere culpa commodi, hic quasi
-                  excepturi recusandae soluta sequi voluptatum, dolorum impedit
-                  repudiandae distinctio.
-                  <span className="text-primary text-sm font-medium cursor-pointer px-[6px]">
-                    ... See More
-                  </span>
-                </p>
-                {/* Media */}
-                <Separator className="mb-1" />
-                <div className="bg-transparent h-96 rounded-md flex justify-center">
-                  <img
-                    src="http://res.cloudinary.com/dycobmjyk/image/upload/v1714324259/Social%20Media/tyigshwfd6a57ob0wahb.jpg"
-                    alt="Media Content"
-                    // fill
-                    className="rounded-md h-full object-contain"
-                  />
-                </div>
-              </div>
+              <PostContent />
             </CardContent>
           </Card>
         </div>

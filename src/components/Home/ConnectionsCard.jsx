@@ -41,7 +41,7 @@ const ConnectionsCard = () => {
                     </p>
                   </div>
                 </DialogTrigger>
-                <ConnectionModal />
+                <ConnectionModal activeTab={"followers"} />
               </Dialog>
             </CardContent>
           </TabsContent>
@@ -60,7 +60,7 @@ const ConnectionsCard = () => {
                     </p>
                   </div>
                 </DialogTrigger>
-                <ConnectionModal />
+                <ConnectionModal activeTab={"following"} />
               </Dialog>
             </CardContent>
           </TabsContent>
