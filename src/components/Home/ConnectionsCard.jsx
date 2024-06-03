@@ -54,7 +54,7 @@ const ConnectionsCard = () => {
               <ConnectionItem />
               <Dialog>
                 <DialogTrigger asChild>
-                  <div className="flex flex-row justify-center">
+                  <div className="flex flex-row justify-center ">
                     <p className="text-sm text-primary font-medium hover:border-[1px] cursor-pointer p-1 px-2 rounded-md shadow-sm">
                       See More &gt;
                     </p>

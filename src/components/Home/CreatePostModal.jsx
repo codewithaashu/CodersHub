@@ -16,6 +16,8 @@ import CodeBox from "../Post/CodeBox";
 import PollBox from "../Post/PollBox";
 import PostSettings from "../Post/PostSettings";
 import PollModalContainer from "../Post/PollModalContainer";
+import { PiTextTBold } from "react-icons/pi";
+import CustomEditor from "@/shareable/CustomEditor";
 
 const CreatePostModal = () => {
   const [text, setText] = useState("");
@@ -24,6 +26,7 @@ const CreatePostModal = () => {
   const [codeBox, setCodeBox] = useState(false);
   const [pollBox, setPollBox] = useState(false);
   const [poll, setPoll] = useState(null);
+  const [textFormatBox, setTextFormatBox] = useState(false);
   const handleWritePost = (e) => {
     setText(e.target.value);
     document.getElementById("text").style.height = "auto";
@@ -59,14 +62,18 @@ const CreatePostModal = () => {
         {/* TextArea */}
         <div className="w-full pt-2 flex flex-col gap-4 max-h-[720px] overflow-y-auto ">
           <div className="flex flex-col gap-3">
-            <textarea
-              className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
-              id="text"
-              placeholder="Describe what's on your mind..."
-              rows={`${imageBox || documentBox || codeBox || poll ? 3 : 8}`}
-              value={text}
-              onChange={handleWritePost}
-            ></textarea>
+            {textFormatBox ? (
+              <CustomEditor />
+            ) : (
+              <textarea
+                className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
+                id="text"
+                placeholder="Describe what's on your mind..."
+                rows={`${imageBox || documentBox || codeBox || poll ? 3 : 8}`}
+                value={text}
+                onChange={handleWritePost}
+              ></textarea>
+            )}
             {imageBox && <MediaBox />}
             {documentBox && <DocumentBox />}
             {codeBox && <CodeBox />}
@@ -133,6 +140,13 @@ const CreatePostModal = () => {
                 </DialogTrigger>
                 <PollModalContainer setPoll={setPoll} poll={poll} />
               </Dialog>
+              {/* Text Formatting */}
+              <PiTextTBold
+                className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
+                  textFormatBox ? "bg-gray-300 shadow-sm " : ""
+                }`}
+                onClick={() => setTextFormatBox(!textFormatBox)}
+              />
             </div>
           </div>
           {/* <div>
