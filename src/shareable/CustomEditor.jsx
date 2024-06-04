@@ -1,13 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  LuHeading1,
-  LuHeading2,
-  LuHeading3,
-  LuHeading4,
-  LuHeading5,
-  LuHeading6,
-} from "react-icons/lu";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import { LuHeading1, LuHeading2 } from "react-icons/lu";
+import { CompositeDecorator, Editor, EditorState, RichUtils } from "draft-js";
 import "../../node_modules/draft-js/dist/Draft.css";
 import {
   BsBlockquoteLeft,
@@ -17,39 +10,29 @@ import {
 } from "react-icons/bs";
 import { MdFormatListBulleted, MdFormatListNumbered } from "react-icons/md";
 import { FaCode } from "react-icons/fa6";
+import { IoLink } from "react-icons/io5";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const CustomEditor = () => {
   const editor = useRef();
-
+  const urlRef = useRef();
+  const [urlValue, setURLValue] = useState("");
+  const [showURLInput, setShowURLInput] = useState(false);
   useEffect(() => {
     editor.current.focus();
   }, []);
 
-  const [editorState, setEditorState] = React.useState(() =>
-    EditorState.createEmpty()
-  );
-  //   State
-  const [selectBtn, setSelectBtn] = useState([]);
-  const [selectList, setSelectList] = useState(null);
-  const [selectHeading, setSelectHeading] = useState(null);
-  const [selectBlockquote, setSelectBlockQuote] = useState(false);
-
-  //overrides the styles for "inline control"
-  const styleMap = {
-    CODE: {
-      backgroundColor: "#f3f3f4",
-      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-      fontSize: "13.5px",
-      padding: "7px 10px",
-      minWidth: "100%",
-      borderRadius: "2px",
-      color: "rgb(67, 67, 67)",
-      wordBreak: "break-word",
-      whiteSpace: "pre-wrap",
-      display: "block",
-      lineHeight: "13px",
+  const decorator = new CompositeDecorator([
+    {
+      strategy: findLinkEntities,
+      component: Link,
     },
-  };
+  ]);
+  const [editorState, setEditorState] = React.useState(() =>
+    EditorState.createEmpty(decorator)
+  );
 
   // overrides the styles for "block control"
   function getBlockStyle(block) {
@@ -64,82 +47,34 @@ const CustomEditor = () => {
   //icon binding
   function _onBoldClick() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "BOLD"));
-    if (selectBtn.some((curr) => curr === "Bold")) {
-      setSelectBtn(selectBtn.filter((curr) => curr != "Bold"));
-    } else {
-      setSelectBtn([...selectBtn, "Bold"]);
-    }
   }
   function _onItalicClick() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "ITALIC"));
-    if (selectBtn.some((curr) => curr === "Italic")) {
-      setSelectBtn(selectBtn.filter((curr) => curr != "Italic"));
-    } else {
-      setSelectBtn([...selectBtn, "Italic"]);
-    }
   }
   function _onUnderlineClick() {
     setEditorState(RichUtils.toggleInlineStyle(editorState, "UNDERLINE"));
-    if (selectBtn.some((curr) => curr === "Underline")) {
-      setSelectBtn(selectBtn.filter((curr) => curr != "Underline"));
-    } else {
-      setSelectBtn([...selectBtn, "Underline"]);
-    }
   }
   function _onOrderListClick() {
     setEditorState(RichUtils.toggleBlockType(editorState, "ordered-list-item"));
-    if (selectList === "Ordered") {
-      setSelectList(null);
-    } else {
-      setSelectList("Ordered");
-    }
   }
   function _onUnorderListClick() {
     setEditorState(
       RichUtils.toggleBlockType(editorState, "unordered-list-item")
     );
-    if (selectList === "Unordered") {
-      setSelectList(null);
-    } else {
-      setSelectList("Unordered");
-    }
   }
   function _onHeaderOneClick() {
     setEditorState(RichUtils.toggleBlockType(editorState, "header-two"));
-    if (selectHeading == "one") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("one");
-    }
   }
   function _onHeaderTwoClick() {
     setEditorState(RichUtils.toggleBlockType(editorState, "header-three"));
-    if (selectHeading == "two") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("two");
-    }
-  }
-  function _onHeaderThreeClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-four"));
-    if (selectHeading == "three") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("three");
-    }
   }
   function _onCodeClick() {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "CODE"));
+    setEditorState(RichUtils.toggleBlockType(editorState, "code-block"));
   }
   function _onBlockQuoteClick() {
     setEditorState(RichUtils.toggleBlockType(editorState, "blockquote"));
-    if (selectBlockquote) {
-      setSelectBlockQuote(false);
-    } else {
-      setSelectBlockQuote(true);
-    }
-    setSelectCode(false);
   }
+  function _onLinkClick() {}
 
   //key binding
   function handleKeyCommand(command, editorState) {
@@ -153,72 +88,113 @@ const CustomEditor = () => {
     return "not-handled";
   }
 
+  //on click on link icon
+  function _onLinkClick() {
+    //get the selection area
+    const selection = editorState.getSelection();
+    //if selection is not collapsed
+    if (!selection.isCollapsed()) {
+      const contentState = editorState.getCurrentContent(); //get current content select area
+      const startKey = editorState.getSelection().getStartKey(); //get start key
+      const startOffset = editorState.getSelection().getStartOffset(); //get offset
+      const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
+      const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
+
+      let url = "";
+      if (linkKey) {
+        const linkInstance = contentState.getEntity(linkKey);
+        url = linkInstance.getData().url;
+      }
+      setShowURLInput(true);
+      setURLValue(url);
+    }
+  }
+
+  //on click add link button
+  function confirmLink(e) {
+    e.preventDefault();
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      "LINK",
+      "MUTABLE",
+      { url: urlValue }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    });
+    setEditorState(
+      RichUtils.toggleLink(
+        newEditorState,
+        newEditorState.getSelection(),
+        entityKey
+      )
+    );
+    setShowURLInput(false);
+    setURLValue("");
+  }
+
+  //on click remove button
+  function removeLink(e) {
+    e.preventDefault();
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+      setEditorState(RichUtils.toggleLink(editorState, selection, null));
+      setShowURLInput(false);
+    }
+  }
+
   return (
     <div className="flex flex-col gap-[6px]">
-      <div className="flex flex-row gap-1">
+      <div className="flex flex-row gap-0 md:gap-1">
         <button
           onClick={_onBoldClick.bind()}
-          className={` ${
-            selectBtn.some((curr) => curr === "Bold") ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <BsTypeBold />
         </button>
         <button
           onClick={_onItalicClick.bind()}
-          className={` ${
-            selectBtn.some((curr) => curr === "Italic") ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <BsTypeItalic />
         </button>
         <button
           onClick={_onUnderlineClick.bind()}
-          className={` ${
-            selectBtn.some((curr) => curr === "Underline") ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <BsTypeUnderline />
         </button>
+
         <button
           onClick={_onHeaderOneClick.bind()}
-          className={` ${
-            selectHeading === "one" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <LuHeading1 />
         </button>
         <button
           onClick={_onHeaderTwoClick.bind()}
-          className={` ${
-            selectHeading === "two" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <LuHeading2 />
         </button>
         <button
-          onClick={_onHeaderThreeClick.bind()}
-          className={` ${
-            selectHeading === "three" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
-        >
-          <LuHeading3 />
-        </button>
-        <button
           onClick={_onOrderListClick.bind()}
-          className={` ${
-            selectList === "Ordered" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <MdFormatListNumbered />
         </button>
         <button
           onClick={_onUnorderListClick.bind()}
-          className={` ${
-            selectList === "Unordered" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <MdFormatListBulleted />
+        </button>
+        <button
+          onClick={_onBlockQuoteClick}
+          className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
+        >
+          <BsBlockquoteLeft />
         </button>
         <button
           onClick={_onCodeClick}
@@ -226,27 +202,68 @@ const CustomEditor = () => {
         >
           <FaCode />
         </button>
-        <button
-          onClick={_onBlockQuoteClick}
-          className={`${
-            selectBlockquote ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
-        >
-          <BsBlockquoteLeft />
-        </button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <button
+              onClick={_onLinkClick}
+              className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
+            >
+              <IoLink />
+            </button>
+          </DialogTrigger>
+          {showURLInput && (
+            <DialogContent className="p-5 w-[340px]">
+              <div className="text-lg font-semibold">Add or Remove Link</div>
+              <input
+                id="link"
+                placeholder="Enter the link"
+                className="text-xs border-[1px] outline-none p-2"
+                ref={urlRef}
+                value={urlValue}
+                onChange={(e) => setURLValue(e.target.value)}
+              />
+              <div className="flex justify-between mt-3">
+                <Button onClick={confirmLink}>Add Link</Button>
+                {urlValue && (
+                  <Button onClick={removeLink} variant="outline">
+                    Remove
+                  </Button>
+                )}
+              </div>
+            </DialogContent>
+          )}
+        </Dialog>
       </div>
       <div onClick={() => editor.current.focus()}>
         <Editor
           blockStyleFn={getBlockStyle} //define the custom css for block control
-          customStyleMap={styleMap} //define the custom css for inline control
           editorState={editorState}
-          onChange={setEditorState}
+          onChange={(editorState) => setEditorState(editorState)}
           handleKeyCommand={handleKeyCommand}
-          placeholder="Describe what's on your mind..."
           ref={editor}
+          placeholder="Describe what's on your mind..."
         />
       </div>
     </div>
+  );
+};
+
+function findLinkEntities(contentBlock, callback, contentState) {
+  contentBlock.findEntityRanges((character) => {
+    const entityKey = character.getEntity();
+    return (
+      entityKey !== null &&
+      contentState.getEntity(entityKey).getType() === "LINK"
+    );
+  }, callback);
+}
+
+const Link = (props) => {
+  const { url } = props.contentState.getEntity(props.entityKey).getData();
+  return (
+    <a href={url} className="text-[#4266b2] underline">
+      {props.children}
+    </a>
   );
 };
 
