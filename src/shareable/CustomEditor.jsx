@@ -13,7 +13,6 @@ import { FaCode } from "react-icons/fa6";
 import { IoLink } from "react-icons/io5";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 const CustomEditor = () => {
   const editor = useRef();
