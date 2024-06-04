@@ -9,7 +9,12 @@ import {
 } from "react-icons/lu";
 import { Editor, EditorState, RichUtils } from "draft-js";
 import "../../node_modules/draft-js/dist/Draft.css";
-import { BsTypeBold, BsTypeItalic, BsTypeUnderline } from "react-icons/bs";
+import {
+  BsBlockquoteLeft,
+  BsTypeBold,
+  BsTypeItalic,
+  BsTypeUnderline,
+} from "react-icons/bs";
 import { MdFormatListBulleted, MdFormatListNumbered } from "react-icons/md";
 import { FaCode } from "react-icons/fa6";
 
@@ -27,6 +32,34 @@ const CustomEditor = () => {
   const [selectBtn, setSelectBtn] = useState([]);
   const [selectList, setSelectList] = useState(null);
   const [selectHeading, setSelectHeading] = useState(null);
+  const [selectBlockquote, setSelectBlockQuote] = useState(false);
+
+  //overrides the styles for "inline control"
+  const styleMap = {
+    CODE: {
+      backgroundColor: "#f3f3f4",
+      fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
+      fontSize: "13.5px",
+      padding: "7px 10px",
+      minWidth: "100%",
+      borderRadius: "2px",
+      color: "rgb(67, 67, 67)",
+      wordBreak: "break-word",
+      whiteSpace: "pre-wrap",
+      display: "block",
+      lineHeight: "13px",
+    },
+  };
+
+  // overrides the styles for "block control"
+  function getBlockStyle(block) {
+    switch (block.getType()) {
+      case "blockquote":
+        return "RichEditor-blockquote";
+      default:
+        return null;
+    }
+  }
 
   //icon binding
   function _onBoldClick() {
@@ -72,7 +105,7 @@ const CustomEditor = () => {
     }
   }
   function _onHeaderOneClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-one"));
+    setEditorState(RichUtils.toggleBlockType(editorState, "header-two"));
     if (selectHeading == "one") {
       setSelectHeading(null);
     } else {
@@ -80,7 +113,7 @@ const CustomEditor = () => {
     }
   }
   function _onHeaderTwoClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-two"));
+    setEditorState(RichUtils.toggleBlockType(editorState, "header-three"));
     if (selectHeading == "two") {
       setSelectHeading(null);
     } else {
@@ -88,40 +121,24 @@ const CustomEditor = () => {
     }
   }
   function _onHeaderThreeClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-three"));
+    setEditorState(RichUtils.toggleBlockType(editorState, "header-four"));
     if (selectHeading == "three") {
       setSelectHeading(null);
     } else {
       setSelectHeading("three");
     }
   }
-  function _onHeaderFourClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-four"));
-    if (selectHeading == "four") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("four");
-    }
-  }
-  function _onHeaderFiveClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-five"));
-    if (selectHeading == "five") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("five");
-    }
-  }
-  function _onHeaderSixClick() {
-    setEditorState(RichUtils.toggleBlockType(editorState, "header-six"));
-    if (selectHeading == "six") {
-      setSelectHeading(null);
-    } else {
-      setSelectHeading("six");
-    }
-  }
   function _onCodeClick() {
-    // setEditorState(RichUtils.toggleInlineStyle(editorState, "CODE"));
-    setEditorState(RichUtils.toggleCode(editorState));
+    setEditorState(RichUtils.toggleInlineStyle(editorState, "CODE"));
+  }
+  function _onBlockQuoteClick() {
+    setEditorState(RichUtils.toggleBlockType(editorState, "blockquote"));
+    if (selectBlockquote) {
+      setSelectBlockQuote(false);
+    } else {
+      setSelectBlockQuote(true);
+    }
+    setSelectCode(false);
   }
 
   //key binding
@@ -188,30 +205,6 @@ const CustomEditor = () => {
           <LuHeading3 />
         </button>
         <button
-          onClick={_onHeaderFourClick.bind()}
-          className={` ${
-            selectHeading === "four" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
-        >
-          <LuHeading4 />
-        </button>
-        <button
-          onClick={_onHeaderFiveClick.bind()}
-          className={` ${
-            selectHeading === "five" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
-        >
-          <LuHeading5 />
-        </button>
-        <button
-          onClick={_onHeaderSixClick.bind()}
-          className={` ${
-            selectHeading === "six" ? "bg-gray-200" : ""
-          } w-8 h-8 rounded-full object-cover text-center p-2`}
-        >
-          <LuHeading6 />
-        </button>
-        <button
           onClick={_onOrderListClick.bind()}
           className={` ${
             selectList === "Ordered" ? "bg-gray-200" : ""
@@ -228,19 +221,31 @@ const CustomEditor = () => {
           <MdFormatListBulleted />
         </button>
         <button
-          onClick={_onCodeClick.bind()}
+          onClick={_onCodeClick}
           className="hover:bg-gray-200 w-8 h-8 rounded-full object-cover text-center p-2"
         >
           <FaCode />
         </button>
+        <button
+          onClick={_onBlockQuoteClick}
+          className={`${
+            selectBlockquote ? "bg-gray-200" : ""
+          } w-8 h-8 rounded-full object-cover text-center p-2`}
+        >
+          <BsBlockquoteLeft />
+        </button>
       </div>
-      <Editor
-        ref={editor}
-        editorState={editorState}
-        onChange={setEditorState}
-        handleKeyCommand={handleKeyCommand}
-        placeholder="Describe what's on your mind..."
-      />
+      <div onClick={() => editor.current.focus()}>
+        <Editor
+          blockStyleFn={getBlockStyle} //define the custom css for block control
+          customStyleMap={styleMap} //define the custom css for inline control
+          editorState={editorState}
+          onChange={setEditorState}
+          handleKeyCommand={handleKeyCommand}
+          placeholder="Describe what's on your mind..."
+          ref={editor}
+        />
+      </div>
     </div>
   );
 };

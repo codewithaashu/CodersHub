@@ -29,9 +29,9 @@ const CreatePostModal = () => {
   const [textFormatBox, setTextFormatBox] = useState(false);
   const handleWritePost = (e) => {
     setText(e.target.value);
-    document.getElementById("text").style.height = "auto";
-    document.getElementById("text").style.height =
-      document.getElementById("text").scrollHeight + "px";
+    document.getElementById("textarea").style.height = "auto";
+    document.getElementById("textarea").style.height =
+      document.getElementById("textarea").scrollHeight + "px";
   };
 
   return (
@@ -67,9 +67,9 @@ const CreatePostModal = () => {
             ) : (
               <textarea
                 className="resize-none border-none outline-none w-full p-2 text-sm font-normal overflow-y-auto scroll-smooth"
-                id="text"
+                id="textarea"
                 placeholder="Describe what's on your mind..."
-                rows={`${imageBox || documentBox || codeBox || poll ? 3 : 8}`}
+                rows={`${imageBox || documentBox || codeBox || poll ? 4 : 12}`}
                 value={text}
                 onChange={handleWritePost}
               ></textarea>
@@ -83,7 +83,7 @@ const CreatePostModal = () => {
         <div className="flex flex-col gap-2">
           <div className="flex flex-row justify-between items-center border-[1px] rounded-md shadow-sm p-1 px-3">
             <p className="text-sm font-medium">Add to your post</p>
-            <div className="flex flex-row gap-4">
+            <div className="flex flex-row gap-2 md:gap-4">
               {/* Photos */}
               <IoMdPhotos
                 className={`text-xl font-medium cursor-pointer h-7 w-7 p-1 rounded-full ${
