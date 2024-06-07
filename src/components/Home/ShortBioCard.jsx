@@ -3,12 +3,17 @@ import { Card, CardContent, CardDescription } from "../ui/card";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdWork } from "react-icons/md";
 import AvatarComponent from "@/shareable/AvatarComponent";
+import { useNavigate } from "react-router-dom";
 const ShortBioCard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Card className="w-full pt-3">
         <CardContent>
-          <div className="flex flex-row gap-3 items-center border-b-[1px] pb-2">
+          <div
+            className="flex flex-row gap-3 items-center border-b-[1px] pb-2 cursor-pointer"
+            onClick={() => navigate("/profile")}
+          >
             <AvatarComponent
               imgSrc={
                 "http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"

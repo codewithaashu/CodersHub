@@ -4,16 +4,23 @@ import AvatarComponent from "@/shareable/AvatarComponent";
 import { TypeAnimation } from "react-type-animation";
 import { Dialog, DialogTrigger } from "../ui/dialog";
 import CreatePostModal from "./CreatePostModal";
+import { useNavigate } from "react-router-dom";
 const AddPostCard = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Card className="pt-5">
         <CardContent className="flex flex-col gap-[10px]">
-          <div className="flex flex-row gap-4 border-b-[1px] pb-3">
-            <AvatarComponent
-              className="w-10 h-10"
-              imgSrc="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
-            />
+          <div className="flex flex-row gap-4 border-b-[1px] pb-3 cursor-pointer">
+            <div
+              className="cursor-pointer"
+              onClick={() => navigate("/profile")}
+            >
+              <AvatarComponent
+                className="w-10 h-10"
+                imgSrc="http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"
+              />
+            </div>
             <Dialog>
               <DialogTrigger asChild>
                 <div className="w-full bg-accent rounded-2xl px-4 h-fit py-2 cursor-pointer">

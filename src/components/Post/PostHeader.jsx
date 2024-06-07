@@ -2,16 +2,20 @@ import AvatarComponent from "@/shareable/AvatarComponent";
 import React from "react";
 import { FaUserPlus } from "react-icons/fa6";
 import { Button } from "../ui/button";
+import { useNavigate } from "react-router-dom";
 
 const PostHeader = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row gap-2 items-center">
-          <AvatarComponent
-            className="w-12 h-12 "
-            imgSrc="https://github.com/shadcn.png"
-          />
+          <div className="cursor-pointer" onClick={() => navigate("/profile")}>
+            <AvatarComponent
+              className="w-12 h-12 "
+              imgSrc="https://github.com/shadcn.png"
+            />
+          </div>
           <div className="flex flex-col gap-0">
             <p className="text-[15px] font-medium leading-5">Ashish Singh</p>
             <p className="text-xs font-normal my-0 text-muted-foreground">

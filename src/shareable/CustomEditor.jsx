@@ -14,7 +14,7 @@ import { IoLink } from "react-icons/io5";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-const CustomEditor = () => {
+const CustomEditor = ({ refer = "CreatePost" }) => {
   const editor = useRef();
   const urlRef = useRef();
   const [urlValue, setURLValue] = useState("");
@@ -233,14 +233,25 @@ const CustomEditor = () => {
           )}
         </Dialog>
       </div>
-      <div onClick={() => editor.current.focus()}>
+      <div
+        onClick={() => editor.current.focus()}
+        style={
+          refer === "JobComment"
+            ? { minHeight: "50px" }
+            : { minHeight: "230px" }
+        }
+      >
         <Editor
           blockStyleFn={getBlockStyle} //define the custom css for block control
           editorState={editorState}
           onChange={(editorState) => setEditorState(editorState)}
           handleKeyCommand={handleKeyCommand}
           ref={editor}
-          placeholder="Describe what's on your mind..."
+          placeholder={
+            refer === "JobComment"
+              ? "Add a comment, ask a question or share your experience & reviews..."
+              : "Describe what's on your mind..."
+          }
         />
       </div>
     </div>

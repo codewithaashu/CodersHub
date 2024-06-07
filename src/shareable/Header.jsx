@@ -6,7 +6,9 @@ import { FaLaptopCode } from "react-icons/fa6";
 import { CgNotes } from "react-icons/cg";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -30,11 +32,17 @@ const Header = () => {
         </div>
         {/*Navbar  */}
         <div className="flex flex-row gap-6">
-          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+          <div
+            className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer"
+            onClick={() => navigate("/")}
+          >
             <IoHome className="text-lg" />
             <label className="text-[13px]">Home</label>
           </div>
-          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+          <div
+            className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer"
+            onClick={() => navigate("/jobs")}
+          >
             <FaBriefcase className="text-lg" />
             <label className="text-[13px]">Jobs</label>
           </div>

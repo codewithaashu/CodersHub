@@ -4,9 +4,9 @@ import App from "./App.jsx";
 import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import PostDetailsPage from "./Pages/PostDetailsPage.jsx";
-import Header from "./shareable/Header.jsx";
-import BottomTab from "./shareable/BottomTab.jsx";
 import Profile from "./Pages/Profile.jsx";
+import Jobs from "./Pages/Jobs.jsx";
+import JobDetails from "./Pages/JobDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,13 +21,17 @@ const router = createBrowserRouter([
     path: "/profile",
     element: <Profile />,
   },
+  {
+    path: "/jobs",
+    element: <Jobs />,
+  },
+  {
+    path: "/job-details",
+    element: <JobDetails />,
+  },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Header />
-    <div className="w-full min-h-screen bg-muted ">
-      <RouterProvider router={router}></RouterProvider>
-    </div>
-    <BottomTab />
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );

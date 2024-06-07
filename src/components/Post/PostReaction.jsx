@@ -15,7 +15,7 @@ import { Popover, PopoverTrigger } from "../ui/popover";
 import { PiDotsThreeOutlineFill } from "react-icons/pi";
 import ThreeDotPopover from "../Home/ThreeDotPopover";
 import PostDetails from "./PostDetails";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const PostReaction = () => {
   const navigate = useNavigate();
   return (
@@ -29,14 +29,13 @@ const PostReaction = () => {
           {/* <BiSolidDownvote className="text-base cursor-pointer" />
            */}
         </div>
-        <Link
-          className="flex flex-row gap-[6px] rounded-2xl bg-gray-200 hover:bg-gray-300 w-fit px-[10px] cursor-pointer py-[6px] items-center md:hidden"
-          // onClick={() => navigate("/post")}
-          to={"/post"}
+        <div
+          className="flex flex-row gap-[6px] rounded-2xl bg-gray-200 hover:bg-gray-300 w-fit px-[10px] cursor-pointer py-[6px] items-center md:hidden "
+          onClick={() => navigate("/post")}
         >
           <FaRegComment className="text-base" />
           <span className="text-[13px]">113</span>
-        </Link>
+        </div>
         <Dialog>
           <DialogTrigger asChild className="hidden md:flex">
             <div className="flex flex-row gap-[6px] rounded-2xl bg-gray-200 hover:bg-gray-300 w-fit px-[10px] cursor-pointer py-[6px] items-center">
