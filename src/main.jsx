@@ -7,6 +7,8 @@ import PostDetailsPage from "./Pages/PostDetailsPage.jsx";
 import Profile from "./Pages/Profile.jsx";
 import Jobs from "./Pages/Jobs.jsx";
 import JobDetails from "./Pages/JobDetails.jsx";
+import Coding from "./Pages/Coding.jsx";
+import DSASheet from "./Pages/DSASheet.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
   {
     path: "/job-details",
     element: <JobDetails />,
+  },
+  {
+    path: "/coding",
+    element: <Coding />,
+  },
+  {
+    path: "/dsa-sheet",
+    element: <DSASheet />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

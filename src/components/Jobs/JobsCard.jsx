@@ -17,7 +17,7 @@ const JobsCard = () => {
         <CardContent className="py-4">
           <div className="flex flex-row gap-5 items-center border-b-[1px] pb-3">
             <img
-              src="http://localhost:5174/src/assets/linkedin.png"
+              src="https://media.licdn.com/dms/image/C4E0BAQErzXWSFkn9tQ/company-logo_100_100/0/1663664110809/cgi_logo?e=1726099200&v=beta&t=qHLQIGhITuqESsPtC55uz6RH3tivCEDfxyRDRVJ6Wz8"
               alt="Company Logo"
               className="w-[60px] h-[60px]"
             />

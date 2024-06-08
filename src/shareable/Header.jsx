@@ -47,7 +47,10 @@ const Header = () => {
             <label className="text-[13px]">Jobs</label>
           </div>
 
-          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+          <div
+            className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer"
+            onClick={() => navigate("/coding")}
+          >
             <FaLaptopCode className="text-lg" />
             <label className="text-[13px]">Coding</label>
           </div>

@@ -15,7 +15,7 @@ const JobDetailsCard = () => {
       <div className="w-full py-[14px] border-b-[1px]">
         <div className="flex flex-row gap-5 items-center">
           <img
-            src="http://localhost:5174/src/assets/linkedin.png"
+            src="https://media.licdn.com/dms/image/C4E0BAQErzXWSFkn9tQ/company-logo_100_100/0/1663664110809/cgi_logo?e=1726099200&v=beta&t=qHLQIGhITuqESsPtC55uz6RH3tivCEDfxyRDRVJ6Wz8"
             alt="Company Logo"
             className="w-[70px] h-[70px]"
           />
