@@ -22,7 +22,7 @@ const DsaSheetCard = ({ imgSrc, heading, content }) => {
         <p className="text-[13px] text-muted-foreground w-full text-center">
           {content}
         </p>
-        <Button className="mt-4">Solve Sheet</Button>
+        <Button className="mt-4">Start Now</Button>
       </Card>
     </>
   );

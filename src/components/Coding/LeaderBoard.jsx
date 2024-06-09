@@ -2,6 +2,8 @@ import React from "react";
 import { Card } from "../ui/card";
 import LeaderBoardItem from "./LeaderBoardItem";
 import { Button } from "../ui/button";
+import { Sheet, SheetTrigger } from "../ui/sheet";
+import LeaderBoardSheet from "./LeaderBoardSheet";
 
 const LeaderBoard = () => {
   return (
@@ -16,9 +18,14 @@ const LeaderBoard = () => {
           />
         </div>
         <LeaderBoardItem />
-        <Button variant="outline" className="hover:bg-gray-100 w-fit">
-          View More &gt;
-        </Button>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" className="hover:bg-gray-100 w-fit">
+              View More &gt;
+            </Button>
+          </SheetTrigger>
+          <LeaderBoardSheet />
+        </Sheet>
       </Card>
     </>
   );

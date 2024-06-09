@@ -8,15 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { Button } from "../ui/button";
 import { IoMdPhotos } from "react-icons/io";
 import { IoSendSharp } from "react-icons/io5";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import SelectComponent from "@/shareable/SelectComponent";
 const JobCommentInputBox = () => {
   const [textFormatBox, setTextFormatBox] = useState(false);
   const [text, setText] = useState("");
@@ -48,30 +40,12 @@ const JobCommentInputBox = () => {
                 ></textarea>
               )}
               {inputFocus && (
-                <Select>
-                  <SelectTrigger className="w-[120px] h-fit py-[6px] text-[13px]">
-                    <SelectValue placeholder="Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel className="text-xs">
-                        Comment Type
-                      </SelectLabel>
-                      <SelectItem value="all" className="text-xs">
-                        All
-                      </SelectItem>
-                      <SelectItem value="question" className="text-xs">
-                        Question
-                      </SelectItem>
-                      <SelectItem value="experience" className="text-xs">
-                        Experience
-                      </SelectItem>
-                      <SelectItem value="review" className="text-xs">
-                        Review
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <SelectComponent
+                  placeholder={"Comment Type"}
+                  selectBtnStyle={"w-[120px] h-fit py-[6px] text-[13px]"}
+                  itemStyle={"text-xs"}
+                  selectItems={["All", "Question", "Experience", "Review"]}
+                />
               )}
             </div>
             {image && (

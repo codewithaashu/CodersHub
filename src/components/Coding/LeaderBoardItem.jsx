@@ -54,10 +54,12 @@ const data = [
   },
 ];
 
-const LeaderBoardItem = () => {
+const LeaderBoardItem = ({ refer }) => {
   return (
     <>
-      <div className="w-full">
+      <div
+        className={`${refer === "sheet" ? "min-w-full max-w-fit" : "w-full"}`}
+      >
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -70,7 +72,7 @@ const LeaderBoardItem = () => {
             <TableBody>
               {data.map((curr, index) => (
                 <TableRow key={index} className="px-2">
-                  <TableCell className="font-medium flex gap-3 p-1 py-[10px] items-center text-center w-max">
+                  <TableCell className="font-medium flex gap-[6px] p-1 py-[10px] items-center text-center w-fit">
                     <AvatarComponent
                       imgSrc={
                         "http://res.cloudinary.com/dycobmjyk/image/upload/v1714114731/Social%20Media/mebzkna2ttje2y7v1cze.jpg"

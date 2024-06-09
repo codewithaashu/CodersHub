@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import CommentCard from "../Post/CommentCard";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import JobCommentInputBox from "./JobCommentInputBox";
+import SelectComponent from "@/shareable/SelectComponent";
 
 const JobComments = () => {
   return (
@@ -20,28 +12,12 @@ const JobComments = () => {
         {/* Heading and filter */}
         <div className="flex flex-row gap-5 px-2 justify-between items-center pt-4">
           <div className="text-base font-medium">Comments</div>
-          <Select>
-            <SelectTrigger className="w-[120px] h-fit py-[6px] text-[13px]">
-              <SelectValue placeholder="Filter By" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel className="text-xs">Filter By</SelectLabel>
-                <SelectItem value="all" className="text-xs">
-                  All
-                </SelectItem>
-                <SelectItem value="question" className="text-xs">
-                  Question
-                </SelectItem>
-                <SelectItem value="experience" className="text-xs">
-                  Experience
-                </SelectItem>
-                <SelectItem value="review" className="text-xs">
-                  Review
-                </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <SelectComponent
+            selectBtnStyle={"w-[120px] h-fit py-[6px] text-[13px]"}
+            placeholder={"Filter By"}
+            selectItems={["All", "Question", "Experience", "Review"]}
+            itemStyle={"text-xs"}
+          />
         </div>
         {/* Comments  Card Container */}
         <div className="flex flex-col gap-5">

@@ -1,17 +1,9 @@
 import React from "react";
 import JobsNavigation from "./JobsNavigation";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import { Tabs, TabsContent } from "../ui/tabs";
 import JobsCard from "./JobsCard";
 import { Card } from "../ui/card";
+import SelectComponent from "@/shareable/SelectComponent";
 
 const JobsContainer = () => {
   return (
@@ -25,28 +17,12 @@ const JobsContainer = () => {
           <JobsNavigation />
           {/* Sort By */}
           <div className="self-end">
-            <Select>
-              <SelectTrigger className="w-[120px] h-fit py-[6px] text-[13px]">
-                <SelectValue placeholder="Sort By" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel className="text-xs">Sort By</SelectLabel>
-                  <SelectItem value="newest" className="text-xs">
-                    Newest
-                  </SelectItem>
-                  <SelectItem value="relevance" className="text-xs">
-                    Relevance
-                  </SelectItem>
-                  <SelectItem value="Popularity" className="text-xs">
-                    Popularity
-                  </SelectItem>
-                  <SelectItem value="verified" className="text-xs">
-                    Verified
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <SelectComponent
+              placeholder={"Sort By"}
+              selectBtnStyle={"w-[120px] h-fit py-[6px] text-[13px]"}
+              itemStyle={"text-xs"}
+              selectItems={["Newest", "Relevance", "Popularity", "Verified"]}
+            />
           </div>
           {/* Jobs card */}
           <TabsContent value="opportunities" className="w-full">

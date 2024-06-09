@@ -13,18 +13,13 @@ import { Separator } from "../ui/separator";
 import TwoColumnsInput from "@/shareable/TwoColumnsInput";
 import { pollOptions } from "@/DB/ProgrammingLang";
 import { Switch } from "../ui/switch";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+
+import SelectComponent from "@/shareable/SelectComponent";
 
 const PollModalContainer = ({ setPoll, poll }) => {
   const [quizmode, setQuizMode] = useState(false);
+  const [select, setSelect] = useState("");
+
   return (
     <>
       <DialogContent className="sm:max-w-[425px] p-5">
@@ -70,29 +65,13 @@ const PollModalContainer = ({ setPoll, poll }) => {
           />
         </div>
         {quizmode && (
-          <Select
-            onValueChange={(value) =>
-              setPoll({ ...poll, correctAnswer: value })
-            }
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Choose correct option" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Options</SelectLabel>
-                {pollOptions?.map((curr, index) => {
-                  return (
-                    curr && (
-                      <SelectItem key={index} value={curr}>
-                        {curr}
-                      </SelectItem>
-                    )
-                  );
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <SelectComponent
+            placeholder={"Choose correct option"}
+            selectBtnStyle={"w-full text-sm"}
+            itemStyle={"text-[13px]"}
+            selectItems={pollOptions}
+            setSelect={setSelect}
+          />
         )}
         <DialogFooter className="pt-2">
           <Button type="submit" onClick={() => console.log(poll)}>
