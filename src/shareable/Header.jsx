@@ -7,6 +7,7 @@ import { CgNotes } from "react-icons/cg";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { MdEventAvailable } from "react-icons/md";
 const Header = () => {
   const navigate = useNavigate();
   return (
@@ -54,9 +55,19 @@ const Header = () => {
             <FaLaptopCode className="text-lg" />
             <label className="text-[13px]">Coding</label>
           </div>
-          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+          <div
+            className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer"
+            onClick={() => navigate("/notes")}
+          >
             <CgNotes className="text-lg" />
             <label className="text-[13px]">Notes</label>
+          </div>
+          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+            <MdEventAvailable
+              className="text-[19px]"
+              onClick={() => navigate("/events")}
+            />
+            <label className="text-[13px]">Events</label>
           </div>
           <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
             <IoNotificationsSharp className="text-lg" />
