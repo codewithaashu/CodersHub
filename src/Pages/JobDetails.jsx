@@ -8,7 +8,7 @@ const JobDetails = () => {
   return (
     <>
       <Header />
-      <div className="w-full min-h-screen bg-muted">
+      <div className="w-full min-h-screen bg-muted md:py-5">
         <div className="hidden container md:grid grid-cols-4 gap-5 py-5 px-3">
           <JobDetailsContainer />
           <SimilarJobsContainer />

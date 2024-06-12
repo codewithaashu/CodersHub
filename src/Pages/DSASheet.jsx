@@ -12,7 +12,7 @@ const DSASheet = () => {
     <>
       <Header />
       <div className="w-full min-h-screen  flex flex-col gap-3 py-5 bg-muted ">
-        <div className="hidden container md:grid grid-cols-4 justify-between gap-7">
+        <div className="hidden container md:grid grid-cols-4 justify-between gap-7 md:py-5">
           <div className="flex flex-col gap-7 col-span-3">
             <DSASheetHeader />
             <div className="flex flex-col gap-4">

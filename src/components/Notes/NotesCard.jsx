@@ -5,14 +5,20 @@ import { FaRegBookmark } from "react-icons/fa";
 import { Separator } from "../ui/separator";
 import { useNavigate } from "react-router-dom";
 
-const NotesCard = () => {
+const NotesCard = ({ refer = "notes" }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Card className="relative w-[320px] cursor-pointer justify-self-center">
+      <Card
+        className={`relative ${
+          refer === "recommeded" ? "w-[240px]" : "w-[320px]"
+        } cursor-pointer justify-self-center`}
+      >
         <div className="bg-[#EFEBEF] w-full h-40"></div>
         <div
-          className="absolute top-6 z-10 left-20 shadow-md"
+          className={`absolute top-6 z-10 ${
+            refer === "recommeded" ? "left-14" : "left-20"
+          } shadow-md`}
           onClick={() => navigate("/notes-details")}
         >
           <img

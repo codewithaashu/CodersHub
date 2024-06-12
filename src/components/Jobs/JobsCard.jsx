@@ -51,7 +51,7 @@ const JobsCard = () => {
               </div>
             </div>
             <div className="flex flex-row justify-between">
-              <Badge className="text-xs font-medium bg-[#bdf4c8] text-primary  ">
+              <Badge className="text-xs font-medium bg-green-100 text-green-600  ">
                 Internship
               </Badge>
               <Badge

@@ -1,9 +1,8 @@
 import React from "react";
 import { Tabs, TabsContent } from "../ui/tabs";
-import SelectComponent from "@/shareable/SelectComponent";
-import { IoSearchSharp } from "react-icons/io5";
 import EventsNavigation from "./EventsNavigation";
-import NotesCard from "../Notes/NotesCard";
+
+import EventsCard from "./EventsCard";
 const EventsContainer = () => {
   return (
     <>
@@ -17,33 +16,32 @@ const EventsContainer = () => {
           {/* Events card */}
           <TabsContent value="competitions" className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-full">
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
             </div>
           </TabsContent>
           <TabsContent value="hackathons" className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-full">
-              <NotesCard />
-              <NotesCard />
+              <EventsCard />
+              <EventsCard />
             </div>
           </TabsContent>
           <TabsContent value="workshops" className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-full">
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
             </div>
           </TabsContent>
           <TabsContent value="technical-events" className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-5 w-full">
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
-              <NotesCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
+              <EventsCard />
             </div>
           </TabsContent>
         </Tabs>
