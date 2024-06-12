@@ -13,6 +13,14 @@ import { HiOutlineDocumentPlus } from "react-icons/hi2";
 import { MdEditDocument } from "react-icons/md";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { BiDownvote, BiUpvote } from "react-icons/bi";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "../ui/dialog";
+import CustomEditor from "@/shareable/CustomEditor";
+import { Button } from "../ui/button";
 
 const data = [
   {
@@ -92,8 +100,18 @@ const AccordinTable = () => {
                     </a>
                   </TableCell>
                   <TableCell className="border-r-2 text-center">
-                    <HiOutlineDocumentPlus className="text-[26px] cursor-pointer rounded-full p-1 bg-gray-200" />
-                    {/* <MdEditDocument className="text-[26px] text-[#1d4ed8] cursor-pointer rounded-full p-1 bg-gray-200" /> */}
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <HiOutlineDocumentPlus className="text-[26px] cursor-pointer rounded-full p-1 bg-gray-200" />
+                        {/* <MdEditDocument className="text-[26px] text-[#1d4ed8] cursor-pointer rounded-full p-1 bg-gray-200" /> */}
+                      </DialogTrigger>
+                      <DialogContent>
+                        <CustomEditor refer="Coding" />
+                        <DialogFooter>
+                          <Button>Save</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
                   </TableCell>
                   <TableCell className="border-r-2 items-center">
                     <p className="bg-green-100 w-fit px-2 rounded-md text-sm text-green-600 ">

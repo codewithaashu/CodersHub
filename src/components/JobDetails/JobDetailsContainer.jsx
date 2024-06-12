@@ -26,7 +26,7 @@ const JobDetailsContainer = () => {
             <TabsContent value="company">
               <CompanyDetails />
             </TabsContent>
-            <TabsContent value="comments">
+            <TabsContent value="discussions">
               <JobComments />
             </TabsContent>
           </Tabs>

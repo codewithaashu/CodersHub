@@ -238,6 +238,8 @@ const CustomEditor = ({ refer = "CreatePost" }) => {
         style={
           refer === "JobComment"
             ? { minHeight: "50px" }
+            : refer === "Coding"
+            ? { minHeight: "360px" }
             : { minHeight: "230px" }
         }
       >
@@ -250,6 +252,8 @@ const CustomEditor = ({ refer = "CreatePost" }) => {
           placeholder={
             refer === "JobComment"
               ? "Add a comment, ask a question or share your experience & reviews..."
+              : refer === "Coding"
+              ? "Write notes here..."
               : "Describe what's on your mind..."
           }
         />

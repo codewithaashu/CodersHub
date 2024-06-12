@@ -11,7 +11,7 @@ const JobComments = () => {
         <JobCommentInputBox />
         {/* Heading and filter */}
         <div className="flex flex-row gap-5 px-2 justify-between items-center pt-4">
-          <div className="text-base font-medium">Comments</div>
+          <div className="text-base font-medium">All Discussions</div>
           <SelectComponent
             selectBtnStyle={"w-[120px] h-fit py-[6px] text-[13px]"}
             placeholder={"Filter By"}

@@ -17,10 +17,10 @@ const JobDetailsNavigation = () => {
           Company
         </TabsTrigger>
         <TabsTrigger
-          value="comments"
+          value="discussions"
           className="rounded-full data-[state=active]:bg-primary data-[state=active]:text-background w-fit bg-gray-100 text-primary"
         >
-          Comments
+          Discussions
         </TabsTrigger>
       </TabsList>
     </>

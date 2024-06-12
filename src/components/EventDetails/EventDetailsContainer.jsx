@@ -22,7 +22,7 @@ const EventDetailsContainer = () => {
             <TabsContent value="description">
               <EventDescription />
             </TabsContent>
-            <TabsContent value="comments">
+            <TabsContent value="discussion">
               <EventComments />
             </TabsContent>
           </Tabs>
