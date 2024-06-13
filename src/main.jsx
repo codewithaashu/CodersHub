@@ -13,6 +13,8 @@ import Notes from "./Pages/Notes.jsx";
 import NotesDetails from "./Pages/NotesDetails.jsx";
 import Events from "./Pages/Events.jsx";
 import EventDetails from "./Pages/EventDetails.jsx";
+import Mentorship from "./Pages/Mentorship.jsx";
+import ExploreMentors from "./Pages/ExploreMentors.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
   {
     path: "/event-details",
     element: <EventDetails />,
+  },
+  {
+    path: "/mentorship",
+    element: <Mentorship />,
+  },
+  {
+    path: "/explore-mentors",
+    element: <ExploreMentors />,
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -8,6 +8,7 @@ import { IoNotificationsSharp } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { MdEventAvailable } from "react-icons/md";
+import { SiCodementor } from "react-icons/si";
 const Header = () => {
   const navigate = useNavigate();
   return (
@@ -68,6 +69,13 @@ const Header = () => {
               onClick={() => navigate("/events")}
             />
             <label className="text-[13px]">Events</label>
+          </div>
+          <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
+            <SiCodementor
+              className="text-[19px]"
+              onClick={() => navigate("/mentorship")}
+            />
+            <label className="text-[13px]">Mentors</label>
           </div>
           <div className="flex flex-col items-center hover:text-black text-gray-600 cursor-pointer">
             <IoNotificationsSharp className="text-lg" />

@@ -1,5 +1,4 @@
 import React from "react";
-import eventsBanner from "../../assets/eventsBanner.png";
 const EventsHeader = () => {
   return (
     <>
