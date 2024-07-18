@@ -18,11 +18,7 @@ const Header = () => {
         style={{ boxShadow: "rgba(0, 0, 0, 0.12) 0px 2.5px 10px" }}
       >
         <div className="flex flex-row items-center gap-3">
-          <img
-            src="https://cdn-icons-png.flaticon.com/256/174/174857.png"
-            alt="Logo"
-            className="w-8 h-8"
-          />
+          <h1 className="text-sm font-light">Logo</h1>
           <div className="flex flex-row items-center bg-muted px-3 py-[7px] gap-2 rounded-md ">
             <IoSearch className="text-base" />
             <input
